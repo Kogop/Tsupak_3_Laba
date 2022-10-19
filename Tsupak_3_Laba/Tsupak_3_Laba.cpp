@@ -1,20 +1,9 @@
-﻿
-/*
- * File:   main.cpp
- * Author: Никита
- *
- * Created on 30 сентября 2021 г., 22:36
- */
-
-#include <cstdlib>
+﻿#include <cstdlib>
 #include<iostream>
 #include<math.h>
 
 using namespace std;
 
-/*
- *
- */
 const int n = 50;
 const int lymda = 2;
 const double a = 0;
@@ -41,7 +30,6 @@ double K(double x, double y) {
 //   }
 //    
 
-
 double middlepryam2(double a, double b, double a1, double b1) {
     double nn = 1000, h, h1, x, x1, in = 0, i;
     h = (b - a) / nn;
@@ -61,16 +49,8 @@ double middlepryam2(double a, double b, double a1, double b1) {
     return in;
 }
 
-
 double del(int i, int j) {
-
-    if (i == j) {
-        return(1);
-    }
-    else
-        return(0);
-
-
+        return(i == j);
 }
 
 double phi(double xi, int i) {
@@ -79,20 +59,18 @@ double phi(double xi, int i) {
 
     h = (b - a) / n;
 
-
     for (j = 0; j < n + 1; j++) {
 
         x[j] = a + j * h;
 
     }
-    if ((xi >= x[i]) && (xi <= x[i + 1]))
+    if ((xi >= x[i]) && (xi <= x[i + 1])) {
         s = 1;
-
-    else
+    }
+    else {
         s = 0;
-
+    }
     return(s);
-
 }
 
 double u(double xi, double c[n]) {
@@ -103,9 +81,6 @@ double u(double xi, double c[n]) {
 
     }
     return(s);
-
-
-
 }
 
 void Gauss(int k, double Matrix[n][n + 1]) {
@@ -134,10 +109,7 @@ int main(int argc, char** argv) {
     double h, x[n + 1], xi[n], A[n][n + 1], c[n];
     int i, j, k;
 
-
     h = (b - a) / n;
-
-
 
     for (i = 0; i < n + 1; i++) {
 
@@ -153,25 +125,16 @@ int main(int argc, char** argv) {
         for (j = 0; j < n; j++) {
             //cout<<" j= "<<j<<" x (j)= "<<x[j]<<" x (j+1)= "<<x[j+1]<<endl;
             A[i][j] = del(i, j) - lymda * middlepryam2(x[j], x[j + 1], x[i], x[i + 1]);
-
-
         }
-
         A[i][n] = (xi[i] * xi[i]) - lymda * ((xi[i] / 3) - 0.25);
-
-
     }
 
     for (i = 0; i < n; i++) {
         for (j = 0; j < n + 1; j++) {
 
             cout << A[i][j] << " ";
-
-
         }
         cout << endl;
-
-
     }
 
     Gauss(0, A);
@@ -180,21 +143,15 @@ int main(int argc, char** argv) {
         for (j = 0; j < n + 1; j++) {
 
             cout << A[i][j] << " ";
-
-
         }
         c[i] = A[i][n];
         cout << endl;
-
-
     }
 
     for (i = 0; i < n; i++) {
         cout << u(xi[i], c) << "  " << pow(xi[i], 2) << endl;
 
-
     }
-
     return 0;
 }
 
